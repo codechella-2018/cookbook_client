@@ -28,4 +28,23 @@ class Client::RecipesController < ApplicationController
 		response = Unirest.post("http://localhost:3000/api/recipes", parameters: client_params).body
 		render 'create.html.erb'
 	end
+
+	def edit
+		response = Unirest.get("http://localhost:3000/api/recipes/#{params[:id]}")
+		@recipe = response.body
+		render 'edit.html.erb'
+	end
+
+	def update
+		client_params = {
+			title: params[:title],
+			chef: params[:chef],
+			ingredients: params[:ingredients],
+			directions: params[:directions],
+			prep_time: params[:prep_time],
+			image_url: params[:image_url]
+		}
+		response = Unirest.patch("http://localhost:3000/api/recipes/#{params[:id]}", parameters: client_params).body
+		render 'update.html.erb'
+	end
 end
