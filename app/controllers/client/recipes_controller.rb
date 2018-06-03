@@ -47,4 +47,16 @@ class Client::RecipesController < ApplicationController
 		response = Unirest.patch("http://localhost:3000/api/recipes/#{params[:id]}", parameters: client_params).body
 		render 'update.html.erb'
 	end
+
+	def destroy
+		recipe_id = params[:id]
+		response = Unirest.delete("http://localhost:3000/api/recipes/#{recipe_id}").body
+		render 'destroy.html.erb'
+	end
 end
+
+
+
+
+
+

@@ -5,6 +5,7 @@
 <h4>Directions: <%= @recipe["directions"] %></h4>
 
 <a href="/client/recipes/<%= @recipe['id']%>/edit">Edit</a><br>
+<a href="/client/recipes/<%= @recipe['id']%>" data-method="delete">Delete</a><br>
 
 <img src="<%= @recipe["image_url"] %>"><br>
 
