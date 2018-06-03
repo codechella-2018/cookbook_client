@@ -1,4 +1,4 @@
 <% @recipes.each do |recipe| %>
-	<h2>Title: <%= recipe['title'] %></h2>
+	<h2><a href="/client/recipes/<%= recipe['id']%>">Title: <%= recipe['title'] %></a></h2>
 	<h3>Chef: <%= recipe['chef'] %></h2>
 <% end %>
