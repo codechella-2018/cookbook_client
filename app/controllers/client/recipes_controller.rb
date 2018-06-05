@@ -1,14 +1,13 @@
 class Client::RecipesController < ApplicationController
 
 	def index
-		response = Unirest.get("http://localhost:3000/api/recipes/")
-		@recipes = response.body #all recipes in an array
+		@recipes = Unirest.get("http://localhost:3000/api/recipes/").body
 		render "index.html.erb"
 	end
 
 	def show
-		response = Unirest.get("http://localhost:3000/api/recipes/#{params[:id]}")
-		@recipe = response.body
+		recipe = Unirest.get("http://localhost:3000/api/recipes/#{params[:id]}")
+		@recipe = recipe.body
 		render 'show.html.erb'
 	end
 
@@ -25,13 +24,13 @@ class Client::RecipesController < ApplicationController
 			prep_time: params[:prep_time],
 			image_url: params[:image_url]
 		}
-		response = Unirest.post("http://localhost:3000/api/recipes", parameters: client_params).body
-		render 'create.html.erb'
+		recipe = Unirest.post("http://localhost:3000/api/recipes", parameters: client_params).body
+		redirect_to "/client/recipes/#{recipe['id']}"
 	end
 
 	def edit
-		response = Unirest.get("http://localhost:3000/api/recipes/#{params[:id]}")
-		@recipe = response.body
+		recipe = Unirest.get("http://localhost:3000/api/recipes/#{params[:id]}")
+		@recipe = recipe.body
 		render 'edit.html.erb'
 	end
 
@@ -44,14 +43,14 @@ class Client::RecipesController < ApplicationController
 			prep_time: params[:prep_time],
 			image_url: params[:image_url]
 		}
-		response = Unirest.patch("http://localhost:3000/api/recipes/#{params[:id]}", parameters: client_params).body
-		render 'update.html.erb'
+		recipe = Unirest.patch("http://localhost:3000/api/recipes/#{params[:id]}", parameters: client_params).body
+		redirect_to "/client/recipes/#{recipe['id']}"
 	end
 
 	def destroy
 		recipe_id = params[:id]
-		response = Unirest.delete("http://localhost:3000/api/recipes/#{recipe_id}").body
-		render 'destroy.html.erb'
+		recipe = Unirest.delete("http://localhost:3000/api/recipes/#{recipe_id}").body
+		redirect_to "/client/recipes"
 	end
 end
 
