@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CookbookClient</title>
+    <title>Cookbook Frontend</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,14 @@
   </head>
 
   <body>
+
+    <% flash.each do |name, message| %>
+      <p><%= message %></p>
+    <% end %>
+
+    <a href="/client/recipes/new">New Recipe</a>
+
     <%= yield %>
+
   </body>
 </html>
