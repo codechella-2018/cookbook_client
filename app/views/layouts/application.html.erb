@@ -10,12 +10,19 @@
   </head>
 
   <body>
-
+    
+    <% if @jwt %>
+      <h4>Web token: <%= @jwt %></h4>
+    <% end %>
+    
     <% flash.each do |name, message| %>
       <p><%= message %></p>
     <% end %>
 
     <a href="/client/recipes/new">New Recipe</a>
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Log In</a>
+    <a href="/logout" data-method="delete">Log Out</a>
 
     <%= yield %>
 
